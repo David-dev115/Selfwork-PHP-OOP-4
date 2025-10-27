@@ -52,3 +52,5 @@ class Opel extends Car {
 $auto = new Opel ( 'ND 123 OJ' , 'Opel'  );
 $auto->setMyCarTelaio('1234');
 $auto->printMessage();
+
+// carico esercizio
