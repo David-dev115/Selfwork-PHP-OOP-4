@@ -14,14 +14,28 @@
 // Completa la classe Fiat con le strutture mancanti e, utilizzando il livello di severita' che ritieni piu' opportuno, estendi i metodi per stampare a terminale la seguente frase: “La mia macchina e' Opel, con targa ND 123 OJ e nmero di Telaio 1234“.
 
 
+
+
+// Da corregere:
+// Ci sei quasi ma c'è solo un piccolo problema. Il codice forse ti funziona poichè stai utilizzando Php che concede molto cose, con altri linguaggi di programmazione avresti grossi problemi. Ogni classe deve avere Attributi, Costruttore e Metodi. La tua classe Car non ha un costruttore ed inizializza malissimo l'attributo di classe, la classe Opel deve si estendere Car ma richiamare proprio il costruttore del padre passando il parametro di cui ha bisogno per inizializzare il suo attributo. Rivediti meglio i concetti, ma ci sei quasi.
+
+
+
 class Car {
   private $num_telaio;
-  protected function setCarTelaio($string) {
-    return $this->num_telaio = $string;
+
+  public function __construct($_num_telaio){
+
+    $this->num_telaio = $_num_telaio;
+
   }
 
-  protected function getCarTelaio(){
+  private function getTelaio(){
     return $this->num_telaio;
+  }
+
+  public function printTelaio(){
+    return $this->getTelaio();
   }
 
 }
@@ -30,27 +44,26 @@ class Opel extends Car {
   protected $license;
   protected $name;
 
-    public function __construct($_license , $_name ) {
-        $this->license = $_license;
-        $this->name = $_name;
-    }
 
-    public function setMyCarTelaio($string) {
-        return $this->setCarTelaio($string);
-    }
+  public function __construct($_num_telaio , $_license , $_name) {
 
-    public function getMyCarTelaio(){
-        return $this->getCarTelaio();
-    }
+    parent::__construct($_num_telaio);
+    $this->license = $_license;
+    $this->name = $_name;
 
-    public function printMessage(){
-        echo "la mia macchina è $this->name con targa $this->license e numero di telaio " . $this->getCarTelaio() . "\n";
-    }
+  }
+
+
+  public function printMessage() {
+
+    echo "La mia macchina e' $this->name, con targa $this->license e nmero di Telaio " . $this->printTelaio() . ".\n";
+  }
 
 }
 
-$auto = new Opel ( 'ND 123 OJ' , 'Opel'  );
-$auto->setMyCarTelaio('1234');
-$auto->printMessage();
 
-// carico esercizio
+$car = new Opel ('1234' , 'ND 123 OJ' , 'Opel' );
+
+$car->printMessage();
+
+//eseguo correzione post revisione
